@@ -5,4 +5,5 @@ A one stop docker image for your fullstack app. The following runtimes/libraries
 - Maven
 - Nodejs
 - Docker
+- Ansible
 
