@@ -29,6 +29,7 @@ jobs:
           echo "------------------------------------------------------\n"
           echo "$DOCKER_PASSWORD" | docker login -u mercur3 --password-stdin
           docker push mercur3/fullstack-app:latest
+          rm -rf ~/.docker
         displayName: docker push mercur3/fullstack-app:latest
         condition: not(eq(variables['Build.Reason'], 'PullRequest'))
         env:
