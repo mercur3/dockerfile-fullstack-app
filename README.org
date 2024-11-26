@@ -1,0 +1,8 @@
+* fullstack-app
+A one stop docker image for your fullstack app. The following runtimes/libraries are included:
+
+- OpenJDK 21
+- Maven
+- Nodejs
+- Docker
+
