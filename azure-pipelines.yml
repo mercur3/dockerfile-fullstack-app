@@ -19,20 +19,15 @@ jobs:
     pool:
       vmImage: ubuntu-latest
     steps:
-      - script: |
-          set -e
-          docker build -f Dockerfile -t mercur3/fullstack-app:latest .
-          echo "------------------------------------------------------\n"
-        displayName: docker build -f Dockerfile -t mercur3/fullstack-app:latest .
-
-      - script: |
-          echo "------------------------------------------------------\n"
-          echo "$DOCKER_PASSWORD" | docker login -u mercur3 --password-stdin
-          docker push mercur3/fullstack-app:latest
-          rm -rf ~/.docker
-        displayName: docker push mercur3/fullstack-app:latest
-        condition: not(eq(variables['Build.Reason'], 'PullRequest'))
-        env:
-          DOCKER_PASSWORD: $(DOCKER_PASSWORD)
+      - task: Docker@2
+        displayName: Build and push image
+        inputs:
+          command: buildAndPush
+          containerRegistry: docker-hub-login
+          repository: mercur3/fullstack-app
+          tags: |
+            $(Build.BuildId)
+            latest
+          Dockerfile: Dockerfile
 
 
